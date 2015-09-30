@@ -2,12 +2,44 @@ package manipulationImage;
 
 //import image.NotreRepresentationImage;
 
+import text.EncodeDecode;
+
+import java.util.BitSet;
+
 /**
  * @author Mathias Chevalier
  */
 public class Lsb {
 
-    //TODO stub
+    /**@author flavian*/
+    public static byte[] putDataIn2(byte[] toHide, byte[] wrapper)
+    {
+        //vérifier que ça rentre
+        byte[] res = wrapper.clone();
+        BitSet buff=BitSet.valueOf(toHide);
+        BitSet wrapperSet = BitSet.valueOf(toHide);
+        for (int i = 0; i <buff.length(); i++) {
+            wrapperSet.set(i * 8, buff.get(i));
+        }
+        byte[] tempByte=wrapperSet.toByteArray();
+        for (int i = 0; i <tempByte.length ; i++) {
+            res[i]=tempByte[i];
+        }
+        return res;
+    }
+    public static byte[] getDataIn2(byte[] wrapper)
+    {
+        byte[] res = new byte[100];
+
+        BitSet buff=new BitSet(wrapper.length);
+        System.out.println("buff.length() = " + buff.length());
+        BitSet wrapperSet = BitSet.valueOf(wrapper);
+
+        for (int i = 0; i <wrapper.length; i++) {
+            buff.set(i,wrapperSet.get(i * 8));
+        }
+        return buff.toByteArray();
+    }
     public static byte[] putDataIn(byte[] toHide, byte[] wrapper)
     {
         byte[] res = wrapper.clone();
@@ -56,5 +88,22 @@ public class Lsb {
         return octet;
     }
 
+    public static void main(String[] args) {
+        byte[] wrapper = new byte[100];
+        for (int i = 0; i < wrapper.length; i++) {
+            wrapper[i]=0;
+        }
+        String toHide = "hello world";
+        byte[] hide = toHide.getBytes();
+        System.out.println("NB BITS TO HIDE"+hide.length*8);
+        System.out.println("NB BITS TO HIDE"+wrapper.length*8);
 
+        byte[] uuu=Lsb.putDataIn2(hide, wrapper);
+        System.out.println(" + :" + uuu.length);
+
+        byte[] UUUU=Lsb.getDataIn2(uuu);
+        String s = new String(UUUU);
+        System.out.println("s +s.length() " + s );
+
+    }
 }

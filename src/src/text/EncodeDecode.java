@@ -19,4 +19,10 @@ public class EncodeDecode {
     {
         return "";
     }
+
+    public static void main(String[] args) {
+        String essai = "essai";
+        String res = byteIntoString(essai.getBytes());
+        System.out.println("res = " + res);
+    }
 }

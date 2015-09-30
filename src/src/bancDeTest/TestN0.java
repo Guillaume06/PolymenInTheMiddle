@@ -29,7 +29,7 @@ public class TestN0 {
             byte[] transformedPixels;
             String hello = "hello world!!!";
             byte[] toHide = hello.getBytes();
-            byte[] hidded=Lsb.putDataIn(toHide,nri.getPixels());
+            byte[] hidded=Lsb.putDataIn2(toHide,nri.getPixels());
 
             //
             byte[] temp = nri.concatBytesArrays(nri.getHeader(),hidded);
@@ -38,7 +38,7 @@ public class TestN0 {
             LecteurEcrivainImage.write(file2,newImageFile);
 
             NotreRepresentationImage nri2 = new NotreRepresentationImage(file2);
-            byte[] hiddedBytesToReveal = Lsb.getDataIn(nri2.getPixels());
+            byte[] hiddedBytesToReveal = Lsb.getDataIn2(nri2.getPixels());
             String hiddedText = EncodeDecode.byteIntoString(hiddedBytesToReveal);
 
             System.out.println("GG ?"+hiddedText+":");
