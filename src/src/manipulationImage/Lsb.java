@@ -7,11 +7,11 @@ import image.NotreRepresentationImage;
  */
 public class Lsb {
     //TODO stub
-    public void putTextIn(String text, NotreRepresentationImage image)
+    public String putTextIn(String text, byte[] bytes)
     {
-
+    return text;
     }
-    public String getTextIn()
+    public String getTextIn(byte[] bytes)
     {
         return "";
     }
