@@ -28,12 +28,19 @@ public class Lsb {
     public static byte[] getDataIn(byte[] bytes) {
         byte[] toReturn = new byte[bytes.length];
         int j=0;
-        for (byte tmp : bytes){
-            int value = getBit(1, tmp);
-            for(int i=8;i>=1;i--)
+        int[] value = new int[8];
+        for (int k=0;k<bytes.length;k++){
+            value[k%8] = getBit(1, bytes[k]);
+            if(k%8==0)
             {
-                setBit(i,value,toReturn[j]);
+                int oiez=0;
+                for(int i=8;i>=1;i--)
+                {
+                    setBit(i,value[oiez],toReturn[j]);
+                    oiez++;
+                }
             }
+
             j++;
         }
         return toReturn;
