@@ -11,11 +11,11 @@ public int meusurerDegradation(NotreRepresentationImage imageOriginale,NotreRepr
     //TODO stub
     return 0;
 }
-    public int maxSizeAvailable(int nbByte, int nbBitCanBeChanged)
+    public static int maxSizeAvailable(int nbByte, int nbBitCanBeChanged)
     {
         return nbByte*nbBitCanBeChanged;
     }
-    public String memoryPrint()
+    public static String memoryPrint()
     {
         //TODO stub
         //Print or return vm memory usage

@@ -1,5 +1,7 @@
 package image;
 
+import sun.misc.IOUtils;
+
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -21,6 +23,19 @@ public class LecteurEcrivainImage {
             e.printStackTrace();
         }
         return null;
+
+    }
+
+    public static void write(String filePath,byte[] toWrite)
+    {
+        try {
+                FileOutputStream out = new FileOutputStream(filePath);
+        out.write(toWrite);
+
+            out.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 }
