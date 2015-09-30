@@ -11,10 +11,9 @@ public int meusurerDegradation(NotreRepresentationImage imageOriginale,NotreRepr
     //TODO stub
     return 0;
 }
-    public int maxSizeAvailable(NotreRepresentationImage image, int nbBitCanBeChanged)
+    public int maxSizeAvailable(int nbByte, int nbBitCanBeChanged)
     {
-        //TODO stub
-        return 0;
+        return nbByte*nbBitCanBeChanged;
     }
     public String memoryPrint()
     {
