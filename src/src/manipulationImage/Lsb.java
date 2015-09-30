@@ -11,7 +11,7 @@ public class Lsb {
     public byte[] putDataIn(byte[] toHide, byte[] wrapper)
     {
         for (int i=7; i<text.size(); i=+8){
-            bytes[i]=0;
+            byte
         }
     return wrapper;
     }
