@@ -1,47 +1,26 @@
 package image;
 
-import java.io.File;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 /**
  * Created by Flavian Jacquot on 30/09/2015.
  */
 public class LecteurEcrivainImage {
     //TODO stub
-    public NotreRepresentationImage lire(String path)
+
+    public static byte[] read(String filePath)
     {
-        return new NotreRepresentationImage();
-    }
+        Path path = Paths.get(filePath);
+        try {
+            byte[] data = Files.readAllBytes(path);
+            return data;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
 
-    public String read(String path)
-    {
-
-        File file = new File(path);
-
-        file.get
-        int lenght=0;
-        String message="";
-        Boolean verifready = null;
-        do
-        {
-            char[] buffer= new char[100];
-            try {
-                lenght=this.m_entree.read(buffer);
-                verifready = this.m_entree.ready();
-                //double vérif
-                if(!verifready)
-                {
-                    Thread.sleep(100);
-                    verifready = this.m_entree.ready();
-                }
-
-                message+=new String(buffer);;
-            }
-            catch (Exception ex) {
-                System.out.println("Erreur lors de la récéption");
-                ex.printStackTrace();
-                break;
-            }
-        }while(verifready);
-        return message;
     }
 }
