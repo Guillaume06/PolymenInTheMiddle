@@ -38,4 +38,22 @@ public class LecteurEcrivainImage {
         }
 
     }
+
+    public static byte[] differenceBetween(String file1, String file2)
+    {
+        byte[] file1Bytes = read(file1);
+        byte[] file2Bytes = read(file2);
+        int length = Math.min(file1Bytes.length, file1Bytes.length);
+        byte[] res = new byte[length];
+        for (int i = 0; i <length ; i++) {
+            res[i]=0;
+        }
+        for (int i = 0; i < length; i++) {
+            if(file1Bytes[i]!=file2Bytes[i])
+            {
+                res[i]=(byte)(file1Bytes[i]-file2Bytes[i]);
+            }
+        }
+        return res;
+    }
 }

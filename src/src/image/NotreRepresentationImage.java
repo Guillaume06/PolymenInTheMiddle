@@ -1,16 +1,23 @@
 package image;
 
+import image.formats.Jpeg;
+
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferByte;
+import java.awt.image.Raster;
 import java.awt.image.WritableRaster;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.Arrays;
 
 /**
  * Created by Flavian Jacquot on 30/09/2015.
  */
 public class NotreRepresentationImage {
+    BufferedImage img;
     private int nbComposantes=3;//bitmap
     public byte[] pixels;
 
@@ -24,6 +31,33 @@ public class NotreRepresentationImage {
     public byte[] all;
     private String path;
 
+
+    public void write(String path)
+    {
+        if(DetecteurDeType.isBitMap(this.all))
+        {
+            byte[] temp = this.concatBytesArrays(this.getHeader(), this.pixels);
+            byte[] newImageFile =  this.concatBytesArrays(temp, this.getFooter());
+            LecteurEcrivainImage.write(path,newImageFile);
+        }
+        else
+        {
+            //create image
+            if(img!=null)
+            {
+
+                    //System.out.println(Arrays.toString(this.pixels));
+                img.getRaster().setDataElements(0,0,this.pixels);
+                 Jpeg.write(path,this.img);
+
+
+            }
+        }
+    }
+    public void setPixels(byte[] toHide)
+    {
+        this.pixels=toHide;
+    }
     public static byte[] concatBytesArrays(byte[] first,byte[] second)
     {
         byte[] concat = new byte[first.length+second.length];
@@ -67,7 +101,14 @@ public class NotreRepresentationImage {
         }
         else
         {
-            throw new Exception("Image format not implemented");
+
+            img = null;
+            try {
+                img = ImageIO.read(new File(path));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            pixels = ((DataBufferByte) img.getRaster().getDataBuffer()).getData();
         }
     }
 
@@ -82,12 +123,13 @@ public class NotreRepresentationImage {
 
     @Override
     public String toString() {
-        return "NotreRepresentationImage{" +
+        return "";
+       /* return "NotreRepresentationImage{" +
                 "pixels=" + pixels.length +
                 ", header=" + header.length +
                 ", all=" + all.length +
                 ", path='" + path + '\'' +
-                '}';
+                '}';*/
     }
     public byte[] getHeader() {
         return header;
